@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        speak() {
+          console.log(this);
+        }
+      }
+      // speak方法被放在了person的原型对象上，在实例调用的时候，会顺着原型链查找这个方法，同时this还是指向当前对象
+      const p = new Person();
+      p.speak();
+      const method2 = p.speak;
+      console.log(method2);
+      method2();
+    </script>
+  </body>
+</html>

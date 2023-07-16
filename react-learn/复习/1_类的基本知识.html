@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. 类中的构造器不是必须要写的，只有要初始化才需要写
+        2. 如果B类继承了A类，并且A类有着自己的构造器，那么B类必须调用super方法
+        3. 类中的所有方法都在原型对象上
+      */
+      class Person {
+        // 构造器方法
+        constructor(name, age) {
+          // 构造器中的this是谁？-- 类的实例对象
+          this.name = name;
+          this.age = age;
+        }
+        // 类中可以直接写赋值语句，这下面代码的含义是，给每一个Person的实例对象，添加一个默认为“nz”的“address”属性
+        address = "nz";
+        // 一般方法
+        // speak方法放在了哪里呢？放在了类的原型对象，prototype里
+        // 通过一般方法调用this的时候，this指向的就是Person实例
+        speak() {
+          console.log(`我叫${this.name}，我${this.age}岁了`);
+        }
+      }
+      class Student extends Person {
+        constructor(name, age, grade) {
+          super(name, age);
+          this.grade = grade;
+        }
+        speak() {
+          console.log(
+            `我叫${this.name}，我${this.age}岁了，我${this.grade}年级了`
+          );
+        }
+      }
+      const s1 = new Student("jason", 19, 13);
+      s1.speak();
+      console.log(s1);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      class MyComponent extends React.Component {
+        render() {
+          return (
+            <div>
+              <h1>我是用类定义的组件(适用于【复杂组件】的定义)</h1>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+      /*
+        当执行这个ReactDOM.render的时候发生了什么？
+        1. react会去查找这个组件，如果是类组件，就调用new方法，创建他
+        2. 不要忘了，哪怕一个类没有定义自己的constructor方法，依然可以被new
+        3. 被new之后，再去调用原型链上面的render方法
+        4. 将render返回的虚拟dom转换为真实dom，呈现到前端
+      */
+    </script>
+  </body>
+</html>

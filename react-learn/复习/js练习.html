@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. 类中的构造器不是必须要写的，只有要初始化才需要写
+        2. 如果B类继承了A类，并且A类有着自己的构造器，那么B类必须调用super方法
+        3. 类中的所有方法都在原型对象上
+      */
+      class Person {
+        // 构造器方法
+        constructor(name, age) {
+          // 构造器中的this是谁？-- 类的实例对象
+          this.name = name;
+          this.age = age;
+        }
+      }
+      console.log(new Person().prototype);
+      console.log(Person.prototype);
+      console.log(new Person());
+    </script>
+  </body>
+</html>

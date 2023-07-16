@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx语法规则</title>
+  </head>
+  <style>
+    .title {
+      background-color: orangered;
+    }
+  </style>
+  <body>
+    <!--准备好一个“容器”-->
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      const spanContent = "Hello ReAcT";
+      const myId = "test";
+      // 1. 创建虚拟DOM
+      const VDOM = (
+        <div>
+          <h1 id={myId} className="title">
+            <span>{spanContent.toLocaleLowerCase()}</span>
+          </h1>
+          <h1 id={myId + "1"} className="title">
+            <span style={{ fontSize: "60px" }}>
+              {spanContent.toLocaleLowerCase()}
+            </span>
+          </h1>
+          <input type="text"></input>
+        </div>
+      );
+      // 2. 渲染虚拟DOM
+      ReactDOM.render(VDOM, document.getElementById("test"));
+    </script>
+  </body>
+</html>

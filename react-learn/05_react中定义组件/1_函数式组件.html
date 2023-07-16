@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      function MyComponent() {
+        console.log(this); // 这里的this会打印undefined，
+        // 因为正常在js里面，如果不是严格模式，this会指向最外围的windows对象，但是在babel把jsx翻译成js交给游览器运行的过程中，会默认使用strict模式，无法在函数内部通过this指向windows对象
+        return (
+          <div>
+            <h1>我是用函数定义的组件(适用于【简单组件】的定义)</h1>
+          </div>
+        );
+      }
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+      // 执行这个render函数的时候发生了什么？
+      // 1. react找到我们定义的组件，如果是小写，默认为是html里面已经存在的标签，如果是大写开头，他就知道了是一个组件，就会随机call这个function
+      // 2. 将内存中的虚拟dom转换为真实dom，呈现到前端
+    </script>
+  </body>
+</html>

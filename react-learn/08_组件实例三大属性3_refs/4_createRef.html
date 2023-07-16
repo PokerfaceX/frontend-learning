@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入proto-types，用于对组件标签属性进行限制-->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        /*
+        createRef会返回一个容器，这个容易可以存储被ref标记的节点，这个容器是“专人专用”，也就是说
+        只能存储一个node
+        */
+        input1 = React.createRef();
+        input2 = React.createRef();
+        showData1 = () => {
+          console.log(this);
+          alert(this.input1.current.value);
+        };
+        showData2 = () => {
+          console.log(this);
+          alert(this.input2.current.value);
+        };
+        render() {
+          return (
+            <div>
+              <input
+                ref={this.input1}
+                type="text"
+                placeholder="点击按钮提示数据"
+              />
+              &nbsp;
+              <button onClick={this.showData1}>提示输入数据</button>
+              &nbsp;
+              <input
+                ref={this.input2}
+                onBlur={this.showData2}
+                type="text"
+                placeholder="失去焦点提示数据"
+              />
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

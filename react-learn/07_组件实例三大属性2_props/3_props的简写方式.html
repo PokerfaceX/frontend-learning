@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入proto-types，用于对组件标签属性进行限制-->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <script type="text/babel">
+      // 创建组件
+      class Person extends React.Component {
+        constructor(props) {
+          super(props);
+          //this.props = { a: 123 };
+        }
+        // 对标签属性进行限制，必要性的限制
+        static propTypes = {
+          name: PropTypes.string.isRequired, // 限制name为字符串，必传
+          age: PropTypes.number, // 现在age为数字
+          gender: PropTypes.string,
+          speak: PropTypes.func, // 现在speak为函数
+        };
+
+        // 指定标签默认属性值
+        static defaultProps = {
+          age: 18,
+          gender: "can't tell",
+        };
+        render() {
+          const { name, age, gender } = this.props;
+          console.log(this);
+          return (
+            <ul>
+              <li>name: {name}</li>
+              <li>age: {age + 1}</li>
+              <li>gender: {gender}</li>
+            </ul>
+          );
+        }
+      }
+
+      const person = {
+        name: "Tom",
+        age: 15,
+        gender: "male",
+      };
+      ReactDOM.render(<Person name="Jerry" />, document.getElementById("test"));
+      ReactDOM.render(
+        <Person
+          name="Jack"
+          gender="female"
+          speak={() => {
+            console.log("good");
+          }}
+        />,
+        document.getElementById("test2")
+      );
+      ReactDOM.render(
+        <Person {...person} speak={speak} />,
+        document.getElementById("test3")
+      );
+
+      function speak() {
+        console.log("我说话了");
+      }
+    </script>
+  </body>
+</html>

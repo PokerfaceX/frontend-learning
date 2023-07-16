@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      class Weather extends React.Component {
+        // 构造器调用 -》 1次
+        constructor(props) {
+          super(props);
+          // 初始化状态
+          this.state = { isHot: true, wind: "微风" };
+          // 解决this的指向问题
+          this.changeWeather = this.changeWeather.bind(this);
+        }
+        // changeWeather调用几次 -》 点几次调用几次
+        changeWeather() {
+          // changeWeather放在了哪里 --》 放在了weather的原型对象上，供实例使用
+          // 如果把这个方法直接赋值给onClick，那就是直接调用，而非实例调用，this就会指向windows object
+          // 而在类中的方法，默认为是严格模式，所以this直接就是undefined
+
+          // 获取原来的isHot数值
+          const isHot = this.state.isHot;
+          // 严重注意：状态（state）不可以直接更改，下面就是直接更改
+          // this.state.isHot = !isHot; // 这里就是错误的写法！！！
+          // 必须通过内置内置api，setState来进行更新， 且更新是一种合并，而不是替换
+          this.setState({ isHot: !isHot });
+        }
+        // render会被调用-》 1 + n次
+        render() {
+          // 读取状态
+          const { isHot } = this.state;
+          return (
+            <h1 onClick={this.changeWeather}>
+              今天天气{this.state.isHot ? "炎热" : "很冷"}, {this.state.wind}
+            </h1>
+          );
+        }
+      }
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
